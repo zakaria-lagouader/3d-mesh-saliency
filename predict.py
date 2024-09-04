@@ -73,6 +73,13 @@ def process_mesh(file_name):
         # Normalize the data
         train_data[idx] = (normals_reshaped + 1) / 2
 
+    if patchSize == 64:
+        # Normalize train_data to [0, 1] range
+        train_data = (train_data - np.min(train_data)) / (np.max(train_data) - np.min(train_data))
+        
+        # Quantize to uint8
+        train_data = np.clip(np.round(train_data * 255), 0, 255).astype(np.uint8)
+
     return model.predict(train_data)
 
 
