@@ -4,9 +4,15 @@ import numpy as np
 from definitions import *
 from multiprocessing import Pool
 import hilbertcurve.hilbertcurve.hilbertcurve as hb
+import argparse
+
+# Parse command line arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("--patchSize", type=int, help="Patch size")
+args = parser.parse_args()
 
 # Configuration
-patchSize = 16 # change the patch size <--- 
+patchSize = args.patchSize if args.patchSize else 16
 numOfElements = patchSize * patchSize
 target = np.asarray([0.0, 1.0, 0.0]) #Rotation target
 
