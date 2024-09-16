@@ -1,3 +1,4 @@
+import os
 import trimesh
 import argparse
 import numpy as np
@@ -10,6 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--patchSize", type=int, help="Patch size")
 parser.add_argument("--model_name", type=str, help="Model name")
 parser.add_argument("--mesh_path", type=str, help="Mesh name")
+parser.add_argument("--export_folder", type=str, help="Folder to export the saliency map as txt file with the same name as the mesh")
 args = parser.parse_args()
 
 # Configuration
@@ -35,7 +37,7 @@ I2HC=I2HC.astype(int)
 HC2I=HC2I.astype(int)
 
 # Load the model
-model = load_model(f"saved-models/{model_name}")
+model = load_model(model_name)
 
 def process_mesh(file_name):
     print(f"Processing {file_name}")
@@ -86,5 +88,9 @@ def process_mesh(file_name):
 if __name__ == "__main__":
     mesh = trimesh.load(mesh_path)
     saliency_map = process_mesh(mesh_path)
-    mesh.visual.face_colors = trimesh.visual.interpolate(saliency_map, color_map='jet')
-    mesh.show()
+
+    if args.export_folder:
+        np.savetxt(f"{args.export_folder}/{os.path.basename(mesh_path).replace('.obj', '')}.txt", saliency_map)
+    else:
+        mesh.visual.face_colors = trimesh.visual.interpolate(saliency_map, color_map='jet')
+        mesh.show()

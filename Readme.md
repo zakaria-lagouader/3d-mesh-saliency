@@ -31,7 +31,7 @@ You can find the training code for each model in these folders:
 to run the infrence code, run the following command:
 
 ```bash
-python3 predict.py --patchSize=16 --model_name=saved-models/original-model-16.h5 --mesh_path=3d-meshes/vase_decimated.obj
+python predict.py --patchSize=16 --model_name=saved-models/original-model-16.h5 --mesh_path=3d-meshes/vase_decimated.obj
 ```
 
 ## Cache Patches
