@@ -90,7 +90,7 @@ if __name__ == "__main__":
     saliency_map = process_mesh(mesh_path)
 
     if args.export_folder:
-        np.savetxt(f"{args.export_folder}/{os.path.basename(mesh_path).replace('.obj', '')}.txt", saliency_map)
+        np.savetxt(f"{args.export_folder}/{os.path.basename(mesh_path).replace('.obj', '')}.txt", saliency_map, fmt='%.5f')
     else:
         mesh.visual.face_colors = trimesh.visual.interpolate(saliency_map, color_map='jet')
         mesh.show()
