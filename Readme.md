@@ -28,10 +28,16 @@ You can find the training code for each model in these folders:
 
 ## Infrence
 
-to run the infrence code, run the following command:
+To run the infrence code, run the following command:
 
 ```bash
 python predict.py --patchSize=16 --model_name=saved-models/original-model-16.h5 --mesh_path=3d-meshes/vase_decimated.obj
+```
+
+If you don't want the visualization and want just the saliency map, run the following command:
+
+```bash
+python predict.py --patchSize=16 --model_name=saved-models/original-model-16.h5 --mesh_path=3d-meshes/vase_decimated.obj --export_folder=folder_name
 ```
 
 ## Cache Patches
